@@ -1,0 +1,2 @@
+# YOBA-Yoga-Project
+Final Project Netanya Academy - Ofir Kvetny, Bailey Soloveichik, Yoav Malka
