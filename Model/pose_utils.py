@@ -78,7 +78,7 @@ def compute_all_angles(results):
             return None
         idx = LANDMARK_MAP[name].value
         landmark = lm[idx]
-        return (landmark.x, landmark.y, landmark.z)
+        return (landmark.x, landmark.y)
 
     angles = {}
 
