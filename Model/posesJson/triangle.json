@@ -1,0 +1,74 @@
+{
+  "version": "1.0",
+  "poseName": "Triangle",
+  "landmarkConvention": "mediapipe_pose",
+  "sides": ["left", "right"],
+  "requiresSideDetection": true,
+  "mirrored": false,
+  "visibility": { "min": 0.5, "strategy": "skip", "missingPenalty": 0.0 },
+  "aliases": {
+    "FRONT": ["HIP", "KNEE", "ANKLE", "SHOULDER", "ELBOW", "WRIST"],
+    "BACK": ["HIP", "KNEE", "ANKLE", "SHOULDER", "ELBOW", "WRIST"]
+  },
+
+  "orientation": [
+    {
+      "name": "torso_tilt",
+      "type": "axis",
+      "segment": ["LEFT_SHOULDER", "LEFT_HIP"],
+      "axis": "vertical",
+      "toleranceDeg": 30,
+      "weight": 1.2
+    }
+  ],
+
+  "angles": [
+    {
+      "name": "front_knee_extended",
+      "points": ["FRONT_HIP", "FRONT_KNEE", "FRONT_ANKLE"],
+      "target": 180,
+      "range": [170, 185],
+      "weight": 1.2
+    },
+    {
+      "name": "back_knee_extended",
+      "points": ["BACK_HIP", "BACK_KNEE", "BACK_ANKLE"],
+      "target": 180,
+      "range": [170, 185],
+      "weight": 1.2
+    },
+    {
+      "name": "upper_arm_vertical",
+      "points": ["FRONT_HIP", "FRONT_SHOULDER", "FRONT_WRIST"],
+      "target": 90,
+      "range": [75, 105],
+      "weight": 1.5
+    },
+    {
+      "name": "lower_arm_down",
+      "points": ["FRONT_SHOULDER", "FRONT_HIP", "FRONT_WRIST"],
+      "target": 90,
+      "range": [60, 120],
+      "weight": 1.0
+    }
+  ],
+
+  "ratios": [
+    {
+      "name": "arm_span_vs_legs",
+      "numerator": ["LEFT_WRIST", "RIGHT_WRIST"],
+      "denominator": ["LEFT_ANKLE", "RIGHT_ANKLE"],
+      "min": 1.2,
+      "max": 2.0,
+      "weight": 1.0
+    },
+    {
+      "name": "hip_to_ankle_ratio",
+      "numerator": ["LEFT_HIP", "RIGHT_HIP"],
+      "denominator": ["LEFT_ANKLE", "RIGHT_ANKLE"],
+      "min": 0.8,
+      "max": 1.2,
+      "weight": 0.8
+    }
+  ]
+}
