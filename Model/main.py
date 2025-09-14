@@ -1,4 +1,5 @@
 # main.py
+import json
 from pose_detector import PoseDetector
 from pose_utils import compute_all_angles, compute_all_angle_directions, compare_poses
 from feature_extractor import FeatureExtractor
@@ -9,35 +10,36 @@ extractor = FeatureExtractor()
 
 # Choose an image filename from IMAGES folder
 image_filename = "1.png"  # Replace with your image file
-image_filename2 = "2.png"  # Replace with your image file 2
 
 # Detect pose
 results, keypoints, confidence = detector.detect_pose(image_filename)
-results2, keypoints2, confidence2 = detector.detect_pose(image_filename2)
 
-# Compute angles
+# Compute angles and directions
 angles = compute_all_angles(results)
 directions = compute_all_angle_directions(results)
 
-angles2 = compute_all_angles(results2)
-directions2 = compute_all_angle_directions(results2)
-
 # Extract features
 features = extractor.extract_features(keypoints, angles)
-features2 = extractor.extract_features(keypoints2, angles2)
 
-# Print results
+pose_name = "downward_dog"  # 👈 Replace manually before each run
+
+# Load reference pose (angles + directions) from JSON
+with open(f"Model/json_reference/{pose_name}_reference.json", "r") as f:
+    ref_data = json.load(f)
+angles_ref = ref_data["angles"]
+directions_ref = ref_data["directions"]
+
+# Print current detection
 print("Detection confidence:", confidence)
 print("Computed angles:", angles)
 print("Computed angle directions:", directions)
 
-print("Computed angles pose 2:", angles2)
-print("Computed angle directions pose 2:", directions2)
-
-print("\n### The two poses are equal? ###")
-fixes = compare_poses(angles, angles2, directions, directions2)
-print(f"{len(fixes)==0}\n")
+# Compare with reference
+print("\n### The pose compared to JSON reference ###")
+fixes = compare_poses(angles, angles_ref, directions, directions_ref)
+print(f"{len(fixes) == 0}\n")
 print(fixes)
 
+# Print features
 print("Feature vector length:", len(features))
 print("First 10 features:", features[:10])

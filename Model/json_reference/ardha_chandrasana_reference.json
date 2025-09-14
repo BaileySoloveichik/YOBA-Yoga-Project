@@ -1,0 +1,23 @@
+{
+    "pose_name": "ardha_chandrasana",
+    "angles": {
+        "left_elbow_angle": 176.632,
+        "right_elbow_angle": 175.285,
+        "left_shoulder_angle": 124.491,
+        "right_shoulder_angle": 80.35,
+        "left_knee_angle": 176.994,
+        "right_knee_angle": 176.592,
+        "left_hip_angle": 57.295,
+        "right_hip_angle": 167.172
+    },
+    "directions": {
+        "left_elbow_angle": "right",
+        "right_elbow_angle": "right",
+        "left_shoulder_angle": "left",
+        "right_shoulder_angle": "up",
+        "left_knee_angle": "left",
+        "right_knee_angle": "up",
+        "left_hip_angle": "down",
+        "right_hip_angle": "down"
+    }
+}
