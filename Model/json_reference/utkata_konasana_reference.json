@@ -1,0 +1,23 @@
+{
+    "pose_name": "utkataKonasana",
+    "angles": {
+        "left_elbow_angle": 90.371,
+        "right_elbow_angle": 93.776,
+        "left_shoulder_angle": 88.987,
+        "right_shoulder_angle": 95.102,
+        "left_knee_angle": 111.192,
+        "right_knee_angle": 111.771,
+        "left_hip_angle": 105.741,
+        "right_hip_angle": 105.17
+    },
+    "directions": {
+        "left_elbow_angle": "up",
+        "right_elbow_angle": "up",
+        "left_shoulder_angle": "down",
+        "right_shoulder_angle": "down",
+        "left_knee_angle": "left",
+        "right_knee_angle": "right",
+        "left_hip_angle": "right",
+        "right_hip_angle": "left"
+    }
+}

@@ -59,6 +59,63 @@ def safe_calculate_angle(pA, pB, pC):
         return calculate_angle(pA, pB, pC)
     except Exception:
         return None
+    
+def compute_all_angles(results):
+    """
+    Given Mediapipe results, return a dictionary:
+    {
+        "left_elbow_angle": 145.2,
+        "right_elbow_angle": 167.3,
+        ...
+    }
+    """
+    if results is None or not hasattr(results, "pose_landmarks") or results.pose_landmarks is None:
+        return {name: None for name in ANGLE_NAMES}
+
+    lm = results.pose_landmarks.landmark
+
+    def get_point(name):
+        if name not in LANDMARK_MAP:
+            return None
+        idx = LANDMARK_MAP[name].value
+        landmark = lm[idx]
+        return (landmark.x, landmark.y)
+
+    angles = {}
+
+    # Elbows
+    angles["left_elbow_angle"] = safe_calculate_angle(
+        get_point("left_shoulder"), get_point("left_elbow"), get_point("left_wrist")
+    )
+    angles["right_elbow_angle"] = safe_calculate_angle(
+        get_point("right_shoulder"), get_point("right_elbow"), get_point("right_wrist")
+    )
+
+    # Shoulders
+    angles["left_shoulder_angle"] = safe_calculate_angle(
+        get_point("left_elbow"), get_point("left_shoulder"), get_point("left_hip")
+    )
+    angles["right_shoulder_angle"] = safe_calculate_angle(
+        get_point("right_elbow"), get_point("right_shoulder"), get_point("right_hip")
+    )
+
+    # Knees
+    angles["left_knee_angle"] = safe_calculate_angle(
+        get_point("left_hip"), get_point("left_knee"), get_point("left_ankle")
+    )
+    angles["right_knee_angle"] = safe_calculate_angle(
+        get_point("right_hip"), get_point("right_knee"), get_point("right_ankle")
+    )
+
+    # Hips
+    angles["left_hip_angle"] = safe_calculate_angle(
+        get_point("left_shoulder"), get_point("left_hip"), get_point("left_knee")
+    )
+    angles["right_hip_angle"] = safe_calculate_angle(
+        get_point("right_shoulder"), get_point("right_hip"), get_point("right_knee")
+    )
+
+    return angles
 
 def get_angle_direction(a, b, c):
     """
@@ -154,63 +211,6 @@ def compute_all_angle_directions(results):
     )
 
     return directions
-
-def compute_all_angles(results):
-    """
-    Given Mediapipe results, return a dictionary:
-    {
-        "left_elbow_angle": 145.2,
-        "right_elbow_angle": 167.3,
-        ...
-    }
-    """
-    if results is None or not hasattr(results, "pose_landmarks") or results.pose_landmarks is None:
-        return {name: None for name in ANGLE_NAMES}
-
-    lm = results.pose_landmarks.landmark
-
-    def get_point(name):
-        if name not in LANDMARK_MAP:
-            return None
-        idx = LANDMARK_MAP[name].value
-        landmark = lm[idx]
-        return (landmark.x, landmark.y)
-
-    angles = {}
-
-    # Elbows
-    angles["left_elbow_angle"] = safe_calculate_angle(
-        get_point("left_shoulder"), get_point("left_elbow"), get_point("left_wrist")
-    )
-    angles["right_elbow_angle"] = safe_calculate_angle(
-        get_point("right_shoulder"), get_point("right_elbow"), get_point("right_wrist")
-    )
-
-    # Shoulders
-    angles["left_shoulder_angle"] = safe_calculate_angle(
-        get_point("left_elbow"), get_point("left_shoulder"), get_point("left_hip")
-    )
-    angles["right_shoulder_angle"] = safe_calculate_angle(
-        get_point("right_elbow"), get_point("right_shoulder"), get_point("right_hip")
-    )
-
-    # Knees
-    angles["left_knee_angle"] = safe_calculate_angle(
-        get_point("left_hip"), get_point("left_knee"), get_point("left_ankle")
-    )
-    angles["right_knee_angle"] = safe_calculate_angle(
-        get_point("right_hip"), get_point("right_knee"), get_point("right_ankle")
-    )
-
-    # Hips
-    angles["left_hip_angle"] = safe_calculate_angle(
-        get_point("left_shoulder"), get_point("left_hip"), get_point("left_knee")
-    )
-    angles["right_hip_angle"] = safe_calculate_angle(
-        get_point("right_shoulder"), get_point("right_hip"), get_point("right_knee")
-    )
-
-    return angles
 
 def compare_poses(angles1, angles2, directions1, directions2 ,threshold=15):
     fixes = {}

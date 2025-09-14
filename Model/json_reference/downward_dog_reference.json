@@ -1,0 +1,23 @@
+{
+    "pose_name": "downward_dog",
+    "angles": {
+        "left_elbow_angle": 171.859,
+        "right_elbow_angle": 169.995,
+        "left_shoulder_angle": 174.334,
+        "right_shoulder_angle": 173.35,
+        "left_knee_angle": 176.23,
+        "right_knee_angle": 176.387,
+        "left_hip_angle": 57.968,
+        "right_hip_angle": 56.264
+    },
+    "directions": {
+        "left_elbow_angle": "right",
+        "right_elbow_angle": "right",
+        "left_shoulder_angle": "left",
+        "right_shoulder_angle": "left",
+        "left_knee_angle": "right",
+        "right_knee_angle": "right",
+        "left_hip_angle": "down",
+        "right_hip_angle": "down"
+    }
+}
