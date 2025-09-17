@@ -1,0 +1,23 @@
+{
+    "pose_name": "natarajasana",
+    "angles": {
+        "left_elbow_angle": 175.64,
+        "right_elbow_angle": 159.056,
+        "left_shoulder_angle": 80.854,
+        "right_shoulder_angle": 161.785,
+        "left_knee_angle": 95.642,
+        "right_knee_angle": 169.587,
+        "left_hip_angle": 103.007,
+        "right_hip_angle": 134.632
+    },
+    "directions": {
+        "left_elbow_angle": "down",
+        "right_elbow_angle": "up",
+        "left_shoulder_angle": "right",
+        "right_shoulder_angle": "down",
+        "left_knee_angle": "left",
+        "right_knee_angle": "left",
+        "left_hip_angle": "up",
+        "right_hip_angle": "left"
+    }
+}
